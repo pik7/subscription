@@ -1,0 +1,54 @@
+<div class="container">    
+    <div class="card col-md-6 offset-3 mt-2">
+        <div class="card-header">
+            <h5 class="card-title"><strong>Paymment data</strong> </h5>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="paymentFormGroup" (ngSubmit)="handlenextStep3()">
+                <div class="mb-3">
+                    <label class="form-label"><span class="requis">*</span>Credit Cart Number : </label>
+                    <input type="number" formControlName="creditCartNumber" class="form-control">
+                    <span class="text-danger" 
+                        *ngIf="paymentFormGroup.controls['creditCartNumber'].touched
+                        && paymentFormGroup.controls['creditCartNumber'].errors"> 
+                        Credit Cart Number is required
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><span class="requis">*</span>Credit Cart Expiration date : </label>
+                    <input type="date" formControlName="creditCartExpDate" class="form-control">
+                    <span class="text-danger" 
+                        *ngIf="paymentFormGroup.controls['creditCartExpDate'].touched
+                        && paymentFormGroup.controls['creditCartExpDate'].errors"> 
+                        Credit Cart Expiration date is required
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><span class="requis">*</span>Credit Cart Security Code : </label>
+                    <input type="password" formControlName="CreditCartSecCode" class="form-control">
+                    <span class="text-danger" 
+                        *ngIf="paymentFormGroup.controls['CreditCartSecCode'].touched
+                        && paymentFormGroup.controls['CreditCartSecCode'].errors"> 
+                        Credit Cart Security Code is required
+                    </span>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary me-md-2" type="button" (click)="handlePrevious()">Previous</button>
+                    <button class="btn btn-primary" [disabled]="!paymentFormGroup.valid" type="submit">Next</button>
+                </div>
+            
+            </form>
+            
+        </div>
+    </div>
+    <div class="card text-bg-info col-md-6 offset-3 mt-2 border-dark arriereplan" style="max-width: 42rem;">
+        <div class="card-body">
+            <h5 class="card-title"><strong>Current  selected subscrption</strong></h5>
+            <p class="card-text">Duration : {{data.parameter.duration}} Months</p>
+            <p class="card-text">Amount of gigabytes  in a cloud : {{data.parameter.amount}} GB</p>
+            <p class="card-text">Upfront payment : {{data.parameter.upfront}}</p>
+            <p class="card-text">Total Price : {{data.totalPrice}}</p>
+        </div>
+    </div>
+</div>
+

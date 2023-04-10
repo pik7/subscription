@@ -1,0 +1,63 @@
+<div class="container">
+    
+    <div class="card " >
+        <div class="card-header">Subcription confirmation </div>
+        <div class="card-body">
+            
+            <div class="row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="card text-bg-info">
+                    <div class="card-body">
+                      <h5 class="card-title">Summary of the selected Subscrition</h5>
+                      <p class="card-text">Duration : {{data.parameter.duration}} Months</p>
+                      <p class="card-text">Amount of gigabytes  in a cloud : {{data.parameter.amount}} GB</p>
+                      <p class="card-text">Upfront payment : {{data.parameter.upfront}}</p>
+                      <p class="card-text">Price USD per gigabyte : {{data.pricePerGB}}</p>
+                      <p class="card-text">Total Price : {{data.totalPrice}}</p>
+                      <button class="btn btn-primary" (click)="handlePrevious()">Previous</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card text-bg-light">
+                    <div class="card-body">
+                      <h5 class="card-title">Confimation</h5>
+                      
+                        <form [formGroup]="confirmFormGroup" (ngSubmit)="handleConfirmation()">
+                            <div class="mb-3">
+                                <label class="form-label"><span class="requis">*</span>Email : </label>
+                                <input type="email" formControlName="email" class="form-control">
+                                <span class="text-danger" 
+                                    *ngIf="confirmFormGroup.controls['email'].touched
+                                    && confirmFormGroup.controls['email'].errors"> 
+                                    Email is required
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" formControlName="agreement" id="agreement">
+                                    <label class="form-check-label" for="upfrontyes">
+                                    Terms and conditions agreement
+                                    </label>
+                                    <span class="text-danger" 
+                                        *ngIf="confirmFormGroup.controls['agreement'].touched
+                                        && confirmFormGroup.controls['agreement'].errors"> 
+                                        Terms and conditions agreement is required
+                                </span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" [disabled]="!confirmFormGroup.valid" type="submit">Confirmation</button>
+                        </form>
+
+                      
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+

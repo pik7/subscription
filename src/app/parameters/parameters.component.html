@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="card col-md-6 offset-3 mt-2">
+        <div class="card-header">
+           <h5 class="card-title"><strong>Subscription parameters</strong></h5> 
+        </div>
+        <div class="card-body">
+            <form [formGroup]="parametersFormGroup" (ngSubmit)="handlenextStep2()">
+                
+                <div class="mb-3">
+                    <label class="form-label"><span class="requis">*</span> Duration : </label>
+                    <select formControlName="duration" class="form-select">
+                        <option value="3">3 Months</option>
+                        <option value="6">6 Months</option>
+                        <option value="12" selected>12 Months</option>
+                    </select>
+                    <span class="text-danger" 
+                        *ngIf="parametersFormGroup.controls['duration'].errors"> 
+                        Duration is required
+                    </span>
+                </div>
+                
+                
+                
+                <div class="mb-3">
+                    <label class="form-label"><span class="requis">*</span>Amount of gigabytes in a cloud : </label>
+                    <select formControlName="amount" class="form-select">
+                        <option value="5" selected>5 GB </option>
+                        <option value="10">10 GB</option>
+                        <option value="50" >50 GB</option>
+                    </select>
+                    <span class="text-danger" 
+                        *ngIf="parametersFormGroup.controls['amount'].errors"> 
+                        Amount is required
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label"><span class="requis">*</span>Upfont payment : </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="upfront" id="upfrontyes" value="YES">
+                        <label class="form-check-label" for="upfrontyes">
+                        Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="upfront" id="upfrontno" value="NO" checked>
+                        <label class="form-check-label" for="upfrontno">
+                        No
+                        </label>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary" [disabled]="!parametersFormGroup.valid" type="submit">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card col-md-6 offset-3 mt-2 border-dark text-bg-info" style="max-width: 42rem;">
+        <div class="card-body">
+            <h5 class="card-title"><strong>Current  selected subscrption</strong></h5>
+            <p class="card-text">Duration : {{data.parameter.duration}} Months</p>
+            <p class="card-text">Amount of gigabytes  in a cloud : {{data.parameter.amount}} GB</p>
+            <p class="card-text">Upfront payment : {{data.parameter.upfront}}</p>
+            <p class="card-text">Total Price : {{data.totalPrice}}</p>
+        </div>
+    </div>
+</div>
+
