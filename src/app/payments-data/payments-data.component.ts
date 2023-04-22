@@ -42,19 +42,8 @@ export class PaymentsDataComponent implements OnInit {
   handlenextStep3(){
     this.payment = this.paymentFormGroup?.value;
     this.data.payment = this.payment;
-
-    this.plans.forEach(element => {
-      if(this.data.parameter.duration == element.duration_months){
-          this.data.pricePerGB = element.price_usd_per_gb;
-          this.data.totalPrice = element.price_usd_per_gb*this.data.parameter.amount;
-          if(this.data.parameter.upfront == "YES"){
-            this.data.totalPrice = this.data.totalPrice - this.data.totalPrice*10/100;
-          }
-      }
-    });
+    this.data = this.billingService.calculate(this.data);
     this.router.navigateByUrl("/confirmation", {state:this.data});
-
-
   }
 
   handlePrevious(){

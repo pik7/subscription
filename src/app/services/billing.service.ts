@@ -20,4 +20,20 @@ export class BillingService {
    getAllPlans(){
     return this.subscriptionPlans;
    }
+
+
+   calculate( data:DataSubcription):DataSubcription{
+    let plans =  this.getAllPlans();
+    plans.forEach(element => {
+      if(data.parameter.duration == element.duration_months){
+          data.pricePerGB = element.price_usd_per_gb;
+          data.totalPrice = element.price_usd_per_gb*data.parameter.amount;
+          if(data.parameter.upfront == "YES"){
+            data.totalPrice = data.totalPrice - data.totalPrice*10/100;
+          }
+      }
+    });
+
+    return data;
+   }
 }

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 //import { isEmpty } from 'rxjs';
-import { DataSubcription, Parameter } from '../model/subscription_plan.model';
+import { DataSubcription, Parameter, Subscription_plan } from '../model/subscription_plan.model';
+import { BillingService } from '../services/billing.service';
 
 @Component({
   selector: 'app-parameters',
@@ -14,8 +15,9 @@ export class ParametersComponent implements OnInit {
   parametersFormGroup!:FormGroup;
   parameter!:Parameter;
   data!:DataSubcription;
+  plans!:Array<Subscription_plan>;
 
-  constructor(private fb:FormBuilder,private route:ActivatedRoute, private router:Router) {
+  constructor(private fb:FormBuilder,private route:ActivatedRoute, private router:Router, private billingService:BillingService) {
     this.data = this.router.getCurrentNavigation()?.extras.state as DataSubcription;
     if(!this.data){
       this.data = this.initData();
@@ -29,13 +31,14 @@ export class ParametersComponent implements OnInit {
         upfront:this.fb.control(this.data.parameter.upfront)
       })
       
-      //this.data = this.initData();
+      this.plans = this.billingService.getAllPlans();
       
     
   }
 
   handlenextStep2(){
     this.data.parameter = this.parametersFormGroup?.value;
+    this.data = this.billingService.calculate(this.data);
     this.router.navigateByUrl("/payments", {state:this.data});
   }
 
