@@ -20,7 +20,7 @@ export class ParametersComponent implements OnInit {
   constructor(private fb:FormBuilder,private route:ActivatedRoute, private router:Router, private billingService:BillingService) {
     this.data = this.router.getCurrentNavigation()?.extras.state as DataSubcription;
     if(!this.data){
-      this.data = this.initData();
+      this.data = this.billingService.initData();
     }
   }
 
@@ -42,22 +42,5 @@ export class ParametersComponent implements OnInit {
     this.router.navigateByUrl("/payments", {state:this.data});
   }
 
-  initData(){
-    return {
-      parameter:{
-        duration:12,
-        amount:5,
-        upfront:"NO",
-      },
-      payment:{
-        creditCartNumber:0,
-        creditCartExpDate:new Date(),
-        CreditCartSecCode:0,
-      },
-      email:"",
-      pricePerGB:0,
-      totalPrice:0,
-      
-    }
-  }
+  
 }

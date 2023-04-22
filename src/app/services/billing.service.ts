@@ -36,4 +36,23 @@ export class BillingService {
 
     return data;
    }
+
+   initData(){
+    return {
+      parameter:{
+        duration:12,
+        amount:5,
+        upfront:"NO",
+      },
+      payment:{
+        creditCartNumber:0,
+        creditCartExpDate:new Date(),
+        CreditCartSecCode:0,
+      },
+      email:"",
+      pricePerGB:0,
+      totalPrice:0,
+      
+    }
+  }
 }
